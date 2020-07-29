@@ -6,4 +6,16 @@
 //  Copyright © 2020 Dicoding. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+extension UIImageView {
+    func setObject(completion: (UIImageView) -> Void) {
+        completion(self)
+    }
+}
+
+extension UILabel {
+    func setObject(completion: (UILabel) -> Void) {
+        completion(self)
+    }
+}

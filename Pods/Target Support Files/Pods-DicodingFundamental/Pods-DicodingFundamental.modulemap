@@ -1,0 +1,6 @@
+framework module Pods_DicodingFundamental {
+  umbrella header "Pods-DicodingFundamental-umbrella.h"
+
+  export *
+  module * { export * }
+}

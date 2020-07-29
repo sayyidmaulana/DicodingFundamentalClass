@@ -8,4 +8,30 @@
 
 import UIKit
 
+class TabbarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let firstTabbar = BerandaController(collectionViewLayout: UICollectionViewFlowLayout())
+        let firstController = UINavigationController(rootViewController: firstTabbar)
+        let berandaItem:UITabBarItem = UITabBarItem(title: "Beranda", image: UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "home"))
+        firstController.tabBarItem = berandaItem
+        
+        let secondTabbar = ThornController()
+        let secondController = UINavigationController(rootViewController: secondTabbar)
+        let thornItem:UITabBarItem = UITabBarItem(title: "Thorn", image: UIImage(named: "thorn")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "thorn"))
+        secondController.tabBarItem = thornItem
+        
+        let thirdTabbar = AboutController()
+        let thirdController = UINavigationController(rootViewController: thirdTabbar)
+        let aboutItem:UITabBarItem = UITabBarItem(title: "About", image: UIImage(named: "about")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "about"))
+        thirdController.tabBarItem = aboutItem
+
+        viewControllers = [firstController, secondController, thirdController]
+        navigationController?.navigationBar.isTranslucent = false
+
+    }
+
+}
 

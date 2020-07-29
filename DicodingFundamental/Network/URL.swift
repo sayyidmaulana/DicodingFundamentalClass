@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+class BaseURL {
+    func baseUrl() -> String {
+            return "https://api.rawg.io"
+        }
+}

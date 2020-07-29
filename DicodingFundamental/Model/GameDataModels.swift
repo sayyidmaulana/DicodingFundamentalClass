@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+struct DataGames: Codable {
+    let result: [Results]?
+}
+    struct Results: Codable {
+        let id: Int?
+        let name: String?
+        let released: String?
+        let rating_top: Int?
+        let background_image: String?
+    }
