@@ -125,7 +125,7 @@ extension BerandaAnotherCell: UICollectionViewDataSource, UICollectionViewDelega
         guard let thumb = gamesDev[indexPath.row].imageBackground else { return UICollectionViewCell() }
         cell.itemImage.loadImage(using: thumb)
         
-        cell.itemName.text = gamesDev[indexPath.row].name
+        cell.itemName.text = "Developer of: \(gamesDev[indexPath.row].name ?? "")"
         return cell
     }
     

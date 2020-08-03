@@ -38,7 +38,7 @@ class CatalougeThreeCell: UICollectionViewCell {
         addSubview(itemImage)
         itemImage.setAnchor(top: topAnchor, left: leadingAnchor, bottom: bottomAnchor, right: trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         addSubview(itemName)
-        itemName.setAnchor(top: nil, left: leadingAnchor, bottom: bottomAnchor, right: trailingAnchor, paddingTop: 0, paddingLeft: 30, paddingBottom: -20, paddingRight: 30, width: 0, height: 0)
+        itemName.setAnchor(top: nil, left: leadingAnchor, bottom: bottomAnchor, right: trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: -20, paddingRight: 0, width: 0, height: 0)
     }
     
     func setLibrary() {

@@ -30,9 +30,9 @@ class CatalougeTwoCell: UICollectionViewCell {
     func setData(data: Result) {
         guard let thumb = data.backgroundImage else { return }
         itemImage.loadImage(using: thumb)
-        itemName.text = data.name
-        itemDate.text = data.released
-        itemRate.text = "\(data.ratingsCount)"
+        itemName.text = "Games: \(data.name ?? "")"
+        itemDate.text = "Released: \(data.released ?? "")"
+        itemRate.text = "Rating: \(data.rating ?? 0)/\(data.ratingsCount ?? 0)/\(data.ratingTop ?? 0)"
     }
 
     private func cellShadow() {
@@ -50,9 +50,9 @@ class CatalougeTwoCell: UICollectionViewCell {
         addSubview(itemName)
         addSubview(itemDate)
         addSubview(itemRate)
-        itemName.setAnchor(top: topAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 30, width: 0, height: 0)
-        itemDate.setAnchor(top: itemName.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
-        itemRate.setAnchor(top: itemDate.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0)
+        itemName.setAnchor(top: topAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 15, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
+        itemDate.setAnchor(top: itemName.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
+        itemRate.setAnchor(top: itemDate.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
     }
     
     func setLibrary() {

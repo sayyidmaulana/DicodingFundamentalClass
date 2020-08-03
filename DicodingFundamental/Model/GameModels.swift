@@ -66,8 +66,8 @@ struct Result: Codable {
     let backgroundImage: String?
     let rating: Double?
     let ratingTop: Int?
-    let ratings: [Rating]
-    let ratingsCount, reviewsTextCount, added: Int
+    let ratings: [Rating]?
+    let ratingsCount, reviewsTextCount, added: Int?
     let addedByStatus: AddedByStatus
     let metacritic, playtime, suggestionsCount: Int
     let userGame: JSONNull?

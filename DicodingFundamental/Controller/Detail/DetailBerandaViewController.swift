@@ -7,13 +7,22 @@
 //
 
 import UIKit
+import WebKit
 
-class DetailBerandaViewController: UIViewController {
+class DetailBerandaViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     
+    var webViewTemp = ""
     var gamesId = ""
     var gamesDetails: DetailsGamesView? = nil
     
     var spinner = UIActivityIndicatorView(style: .large)
+    
+    lazy var webView: WKWebView = {
+        let webConfiguration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        return webView
+    }()
     
     lazy var imgMenu: UIImageView = {
         let imgViewMenu = UIImageView()
@@ -31,7 +40,7 @@ class DetailBerandaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = ColorTheme.darkRed
+        view.backgroundColor = ColorTheme.redLight
         setupView()
         setData()
     }
@@ -40,7 +49,9 @@ class DetailBerandaViewController: UIViewController {
         view.addSubview(imgMenu)
         imgMenu.setAnchor(top: view.topAnchor, left: view.leadingAnchor, bottom: nil, right: view.trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width * 8 / 2, height: 300)
         view.addSubview(textMenu)
-        textMenu.setAnchor(top: imgMenu.bottomAnchor, left: view.leadingAnchor, bottom: view.bottomAnchor, right: view.trailingAnchor, paddingTop: 30, paddingLeft: 30, paddingBottom: 20, paddingRight: 30, width: 0, height: 0)
+        textMenu.setAnchor(top: imgMenu.bottomAnchor, left: view.leadingAnchor, bottom: nil, right: view.trailingAnchor, paddingTop: 30, paddingLeft: 30, paddingBottom: 20, paddingRight: 30, width: 0, height: 0)
+        view.addSubview(webView)
+        webView.setAnchor(top: textMenu.bottomAnchor, left: view.leadingAnchor, bottom: view.bottomAnchor, right: view.trailingAnchor, paddingTop: 10, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
         
         spinner.startAnimating()
         view.addSubview(spinner)
@@ -73,7 +84,12 @@ class DetailBerandaViewController: UIViewController {
 
                     guard let thumb = self.gamesDetails?.background_image else { return }
                     self.imgMenu.loadImage(using: thumb)
-                    self.textMenu.text = self.gamesDetails?.description
+                    self.textMenu.text = "Description:"
+                    self.webViewTemp = self.gamesDetails?.description ?? ""
+                    self.webView.loadHTMLString(self.webViewTemp, baseURL: .none)
+                    self.webView.allowsBackForwardNavigationGestures = true
+                    self.webView.configuration.preferences.javaScriptEnabled = true
+                    self.webView.navigationDelegate = self
                       self.spinner.isHidden = true
                 }
                 

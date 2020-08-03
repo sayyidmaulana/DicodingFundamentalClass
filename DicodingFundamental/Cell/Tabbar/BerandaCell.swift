@@ -127,7 +127,7 @@ extension BerandaCell: UICollectionViewDataSource, UICollectionViewDelegate, UIC
         guard let thumb = games[indexPath.row].imageBackground else { return UICollectionViewCell() }
         cell.itemImage.loadImage(using: thumb)
         
-        cell.itemName.text = games[indexPath.row].name
+        cell.itemName.text = "Genres: \(games[indexPath.row].name ?? "")"
         
         return cell
     }
