@@ -78,6 +78,9 @@ class BerandaController: UICollectionViewController, UICollectionViewDelegateFlo
     }
     
     private func setupView() {
+        let share = UIBarButtonItem(image: UIImage(named: "ic_info"),  style: .plain, target: self, action: #selector(self.review))
+        navigationItem.rightBarButtonItem = share
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(BerandaCell.self, forCellWithReuseIdentifier: identifier)
@@ -85,6 +88,10 @@ class BerandaController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView.register(BerandaAnotherCell.self, forCellWithReuseIdentifier: identifierAnotherCell)
         collectionView.backgroundColor = .gray
         collectionView.isScrollEnabled = false
+    }
+    
+    @objc func review() {
+        Utilities.showAlert(controller: self, message: "Copyright 2020", seconds: 1)
     }
 
 }
