@@ -18,6 +18,8 @@ class BerandaViewCell: UICollectionViewCell {
     
     var games : [Result] = []
     
+        var spinner = UIActivityIndicatorView(style: .large)
+    
         weak var delegate: BerandaViewProtocol?
 
         override init(frame: CGRect) {
@@ -34,7 +36,7 @@ class BerandaViewCell: UICollectionViewCell {
     
     fileprivate lazy var collectionSubview: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.isScrollEnabled = true
         cv.backgroundColor = .white
@@ -49,6 +51,10 @@ class BerandaViewCell: UICollectionViewCell {
         
         addSubview(collectionSubview)
         collectionSubview.setAnchor(top: topAnchor, left: leadingAnchor, bottom: bottomAnchor, right: trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        spinner.startAnimating()
+        addSubview(spinner)
+        spinner.setAnchor(top: topAnchor, left: leadingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 80, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 0)
     }
     
     private func cellShadow() {
@@ -62,7 +68,7 @@ class BerandaViewCell: UICollectionViewCell {
     
     private func checkGenre() {
         
-        CustomActivityIndicator.shared.show(uiView: self.collectionSubview, backgroundColor: .gray)
+        self.spinner.isHidden = false
         
         let myUrl = URL(string: endPointGames)
         var request = URLRequest(url: myUrl!)
@@ -87,7 +93,7 @@ class BerandaViewCell: UICollectionViewCell {
                 DispatchQueue.main.async {
                     self.collectionSubview.reloadData()
                     
-                    CustomActivityIndicator.shared.hide(uiView: self.collectionSubview)
+                    self.spinner.isHidden = true
                 }
                 
             } catch let jsonError {

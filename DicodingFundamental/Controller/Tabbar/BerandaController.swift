@@ -71,7 +71,7 @@ class BerandaController: UICollectionViewController, UICollectionViewDelegateFlo
         if indexPath.item == 0 {
             return CGSize(width: view.frame.width, height: 180)
         } else if indexPath.item == 1 {
-            return CGSize(width: view.frame.width, height: 300)
+            return CGSize(width: view.frame.width, height: 150)
         } else {
             return CGSize(width: view.frame.width, height: 180)
         }
@@ -84,7 +84,7 @@ class BerandaController: UICollectionViewController, UICollectionViewDelegateFlo
         collectionView.register(BerandaViewCell.self, forCellWithReuseIdentifier: identifierCell)
         collectionView.register(BerandaAnotherCell.self, forCellWithReuseIdentifier: identifierAnotherCell)
         collectionView.backgroundColor = .gray
-        collectionView.isScrollEnabled = true
+        collectionView.isScrollEnabled = false
     }
 
 }

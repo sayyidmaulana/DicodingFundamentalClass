@@ -13,6 +13,8 @@ class DetailBerandaController: UIViewController {
    var genreId = ""
     var genreDetails: DetailGenre? = nil
     
+    var spinner = UIActivityIndicatorView(style: .large)
+    
     lazy var imgMenu: UIImageView = {
         let imgViewMenu = UIImageView()
         imgViewMenu.contentMode = .scaleAspectFit
@@ -41,11 +43,15 @@ class DetailBerandaController: UIViewController {
         imgMenu.setAnchor(top: view.topAnchor, left: view.leadingAnchor, bottom: nil, right: view.trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: view.frame.width * 8 / 2, height: 300)
         view.addSubview(textMenu)
         textMenu.setAnchor(top: imgMenu.bottomAnchor, left: view.leadingAnchor, bottom: view.bottomAnchor, right: view.trailingAnchor, paddingTop: 30, paddingLeft: 30, paddingBottom: 20, paddingRight: 30, width: 0, height: 0)
+
+        spinner.startAnimating()
+        view.addSubview(spinner)
+        spinner.setAnchor(top: view.topAnchor, left: view.leadingAnchor, bottom: nil, right: view.trailingAnchor, paddingTop: 150, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 0)
     }
 
     private func setData() {
 
-        
+        self.spinner.isHidden = false
         let myUrl = URL(string: filterGenre(genre_id: genreId))
         var request = URLRequest(url: myUrl!)
         
@@ -58,7 +64,7 @@ class DetailBerandaController: UIViewController {
             }
             
             guard let data = data else { return }
-            
+
             do {
                 
                 
@@ -70,7 +76,7 @@ class DetailBerandaController: UIViewController {
                     guard let thumb = self.genreDetails?.imageBackground else { return }
                     self.imgMenu.loadImage(using: thumb)
                     self.textMenu.text = self.genreDetails?.detailGenreDescription
-
+                    self.spinner.isHidden = true
                 }
                 
             } catch let jsonError {

@@ -18,6 +18,8 @@ class BerandaCell: UICollectionViewCell {
     
     var games : [GenreResult] = []
     
+        var spinner = UIActivityIndicatorView(style: .large)
+    
     weak var delegate: BerandaProtocol?
 
         override init(frame: CGRect) {
@@ -49,6 +51,10 @@ class BerandaCell: UICollectionViewCell {
         
         addSubview(collectionSubview)
         collectionSubview.setAnchor(top: topAnchor, left: leadingAnchor, bottom: bottomAnchor, right: trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        
+        spinner.startAnimating()
+        addSubview(spinner)
+        spinner.setAnchor(top: topAnchor, left: leadingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 80, paddingLeft: 50, paddingBottom: 0, paddingRight: 50, width: 0, height: 0)
     }
     
     private func cellShadow() {
@@ -61,6 +67,8 @@ class BerandaCell: UICollectionViewCell {
     }
     
     private func checkGenre() {
+        
+        self.spinner.isHidden = false
         
         let myUrl = URL(string: genre)
         var request = URLRequest(url: myUrl!)
@@ -85,6 +93,7 @@ class BerandaCell: UICollectionViewCell {
                 DispatchQueue.main.async {
                     self.collectionSubview.reloadData()
 
+                    self.spinner.isHidden = true
                 }
                 
             } catch let jsonError {
