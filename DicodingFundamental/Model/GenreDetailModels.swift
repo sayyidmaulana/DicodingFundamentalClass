@@ -15,15 +15,13 @@ import Foundation
 
 // MARK: - DetailGenre
 struct DetailGenre: Codable {
-    let id: Int
-    let name, slug: String
-    let gamesCount: Int
-    let imageBackground: String
-    let detailGenreDescription: String
+    let id: Int?
+    let name: String?
+    let imageBackground: String?
+    let detailGenreDescription: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, slug
-        case gamesCount = "games_count"
+        case id, name
         case imageBackground = "image_background"
         case detailGenreDescription = "description"
     }

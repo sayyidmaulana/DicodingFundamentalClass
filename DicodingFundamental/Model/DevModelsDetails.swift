@@ -15,13 +15,13 @@ import Foundation
 // MARK: - DevelopersDetails
 struct DevelopersDetails: Codable {
     let id: Int?
-    let name, slug: String?
+    let name: String?
     let gamesCount: Int?
     let imageBackground: String?
     let developersDetailsDescription: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, slug
+        case id, name
         case gamesCount = "games_count"
         case imageBackground = "image_background"
         case developersDetailsDescription = "description"

@@ -122,8 +122,6 @@ extension BerandaCell: UICollectionViewDataSource, UICollectionViewDelegate, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionSubview.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatalougeOneCell
-//        let dataGames = games[indexPath.row]
-//        cell.setupData(data: dataGames)
         guard let thumb = games[indexPath.row].imageBackground else { return UICollectionViewCell() }
         cell.itemImage.loadImage(using: thumb)
         

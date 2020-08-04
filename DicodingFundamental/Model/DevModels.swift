@@ -14,32 +14,19 @@ import Foundation
 
 // MARK: - Developers
 struct Developers: Codable {
-    let count: Int?
-    let next: String?
-    let previous: JSONNull?
     let results: [DevResult]?
 }
 
 // MARK: - Result
 struct DevResult: Codable {
     let id: Int?
-    let name, slug: String?
-    let gamesCount: Int?
+    let name: String?
     let imageBackground: String?
-    let games: [DevGame]?
 
     enum CodingKeys: String, CodingKey {
-        case id, name, slug
-        case gamesCount = "games_count"
+        case id, name
         case imageBackground = "image_background"
-        case games
     }
 }
 
-// MARK: - Game
-struct DevGame: Codable {
-    let id: Int?
-    let slug, name: String?
-    let added: Int?
-}
 
