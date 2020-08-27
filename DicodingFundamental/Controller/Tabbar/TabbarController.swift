@@ -13,14 +13,14 @@ class TabbarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let firstTabbar = BerandaController(collectionViewLayout: UICollectionViewFlowLayout())
+        let firstTabbar = GameController()
         let firstController = UINavigationController(rootViewController: firstTabbar)
-        let berandaItem:UITabBarItem = UITabBarItem(title: "Beranda", image: UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "home"))
+        let berandaItem:UITabBarItem = UITabBarItem(title: "Games", image: UIImage(named: "home")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "home"))
         firstController.tabBarItem = berandaItem
         
-        let secondTabbar = ThornController()
+        let secondTabbar = GenreController()
         let secondController = UINavigationController(rootViewController: secondTabbar)
-        let thornItem:UITabBarItem = UITabBarItem(title: "Thorn", image: UIImage(named: "thorn")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "thorn"))
+        let thornItem:UITabBarItem = UITabBarItem(title: "Genres", image: UIImage(named: "thorn")?.withRenderingMode(UIImage.RenderingMode.alwaysOriginal), selectedImage: UIImage(named: "thorn"))
         secondController.tabBarItem = thornItem
         
         let thirdTabbar = AboutController()
