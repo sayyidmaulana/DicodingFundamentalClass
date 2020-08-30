@@ -63,7 +63,7 @@ class GameController: UIViewController {
     private func setupView() {
         collectionSubview.delegate = self
         collectionSubview.dataSource = self
-        collectionSubview.register(CatalougeTwoCell.self, forCellWithReuseIdentifier: identifier)
+        collectionSubview.register(GameCell.self, forCellWithReuseIdentifier: identifier)
         
         view.addSubview(collectionSubview)
         collectionSubview.setAnchor(top: view.topAnchor, left: view.leadingAnchor, bottom: view.bottomAnchor, right: view.trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
@@ -147,7 +147,8 @@ extension GameController: UICollectionViewDataSource, UICollectionViewDelegate, 
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionSubview.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CatalougeTwoCell
+        let cell = collectionSubview.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! GameCell
+        cell.delegate = self
         let game = games[indexPath.item]
         cell.setData(data: game)
         return cell
