@@ -120,7 +120,8 @@ class GameController: UIViewController {
     }
     
     @objc func fav() {
-        
+        let vc = FavoriteGamesController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func dev() {

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		753A4DB36845063392F20AF3 /* Pods_DicodingFundamental.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7F2965783BFE9081507EAE /* Pods_DicodingFundamental.framework */; };
 		FA215027250CB48800A9A112 /* FavoriteGamesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA215026250CB48800A9A112 /* FavoriteGamesController.swift */; };
+		FA215029250CB67100A9A112 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA215028250CB67100A9A112 /* FavoriteCell.swift */; };
 		FA24825B24BAEC38004A3BF3 /* GameDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24825A24BAEC38004A3BF3 /* GameDataModels.swift */; };
 		FA24825D24BAF263004A3BF3 /* GenreModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24825C24BAF263004A3BF3 /* GenreModels.swift */; };
 		FA24826124BB2A62004A3BF3 /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24826024BB2A62004A3BF3 /* Net.swift */; };
@@ -55,6 +56,7 @@
 		667C59B61E7080253DA83AF3 /* Pods-DicodingFundamental.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DicodingFundamental.release.xcconfig"; path = "Target Support Files/Pods-DicodingFundamental/Pods-DicodingFundamental.release.xcconfig"; sourceTree = "<group>"; };
 		C1BD36806E1EB1007EC14044 /* Pods-DicodingFundamental.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DicodingFundamental.debug.xcconfig"; path = "Target Support Files/Pods-DicodingFundamental/Pods-DicodingFundamental.debug.xcconfig"; sourceTree = "<group>"; };
 		FA215026250CB48800A9A112 /* FavoriteGamesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesController.swift; sourceTree = "<group>"; };
+		FA215028250CB67100A9A112 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 		FA24825A24BAEC38004A3BF3 /* GameDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataModels.swift; sourceTree = "<group>"; };
 		FA24825C24BAF263004A3BF3 /* GenreModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModels.swift; sourceTree = "<group>"; };
 		FA24826024BB2A62004A3BF3 /* Net.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Net.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				FAF70F3124BA9D4B00A7294D /* DetailBerandaViewController.swift */,
 				FAF70F3B24BAAA6A00A7294D /* DetailBerandaAnotherController.swift */,
 				FA215026250CB48800A9A112 /* FavoriteGamesController.swift */,
+				FA215028250CB67100A9A112 /* FavoriteCell.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				FAF70F3424BA9FF900A7294D /* BerandaDelegate.swift in Sources */,
 				FAD23F5924FBC732002D483A /* GameDelegate.swift in Sources */,
 				FA24825B24BAEC38004A3BF3 /* GameDataModels.swift in Sources */,
+				FA215029250CB67100A9A112 /* FavoriteCell.swift in Sources */,
 				FAF70F2E24BA991E00A7294D /* ViewGroup.swift in Sources */,
 				FA4DCDC224F7E8EE007C2C05 /* GameCell.swift in Sources */,
 				FAF70F0224BA54EE00A7294D /* BerandaController.swift in Sources */,
