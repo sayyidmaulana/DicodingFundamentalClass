@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		753A4DB36845063392F20AF3 /* Pods_DicodingFundamental.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A7F2965783BFE9081507EAE /* Pods_DicodingFundamental.framework */; };
+		FA215027250CB48800A9A112 /* FavoriteGamesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA215026250CB48800A9A112 /* FavoriteGamesController.swift */; };
 		FA24825B24BAEC38004A3BF3 /* GameDataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24825A24BAEC38004A3BF3 /* GameDataModels.swift */; };
 		FA24825D24BAF263004A3BF3 /* GenreModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24825C24BAF263004A3BF3 /* GenreModels.swift */; };
 		FA24826124BB2A62004A3BF3 /* Net.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA24826024BB2A62004A3BF3 /* Net.swift */; };
@@ -21,6 +22,7 @@
 		FA4DCDC424F7E8FD007C2C05 /* GenreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4DCDC324F7E8FD007C2C05 /* GenreCell.swift */; };
 		FAAFFA4D24CD874E007D4FBB /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAFFA4C24CD874E007D4FBB /* URL.swift */; };
 		FAD23F5924FBC732002D483A /* GameDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD23F5824FBC732002D483A /* GameDelegate.swift */; };
+		FAD23F5C24FBDB06002D483A /* FavoriteModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAD23F5A24FBDB06002D483A /* FavoriteModel.xcdatamodeld */; };
 		FAF70EFE24BA54EE00A7294D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF70EFD24BA54EE00A7294D /* AppDelegate.swift */; };
 		FAF70F0024BA54EE00A7294D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF70EFF24BA54EE00A7294D /* SceneDelegate.swift */; };
 		FAF70F0224BA54EE00A7294D /* BerandaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAF70F0124BA54EE00A7294D /* BerandaController.swift */; };
@@ -52,6 +54,7 @@
 		1A7F2965783BFE9081507EAE /* Pods_DicodingFundamental.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DicodingFundamental.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		667C59B61E7080253DA83AF3 /* Pods-DicodingFundamental.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DicodingFundamental.release.xcconfig"; path = "Target Support Files/Pods-DicodingFundamental/Pods-DicodingFundamental.release.xcconfig"; sourceTree = "<group>"; };
 		C1BD36806E1EB1007EC14044 /* Pods-DicodingFundamental.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DicodingFundamental.debug.xcconfig"; path = "Target Support Files/Pods-DicodingFundamental/Pods-DicodingFundamental.debug.xcconfig"; sourceTree = "<group>"; };
+		FA215026250CB48800A9A112 /* FavoriteGamesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteGamesController.swift; sourceTree = "<group>"; };
 		FA24825A24BAEC38004A3BF3 /* GameDataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDataModels.swift; sourceTree = "<group>"; };
 		FA24825C24BAF263004A3BF3 /* GenreModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreModels.swift; sourceTree = "<group>"; };
 		FA24826024BB2A62004A3BF3 /* Net.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Net.swift; sourceTree = "<group>"; };
@@ -65,6 +68,7 @@
 		FA4DCDC324F7E8FD007C2C05 /* GenreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCell.swift; sourceTree = "<group>"; };
 		FAAFFA4C24CD874E007D4FBB /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
 		FAD23F5824FBC732002D483A /* GameDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDelegate.swift; sourceTree = "<group>"; };
+		FAD23F5B24FBDB06002D483A /* FavoriteModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteModel.xcdatamodel; sourceTree = "<group>"; };
 		FAF70EFA24BA54EE00A7294D /* DicodingFundamental.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DicodingFundamental.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAF70EFD24BA54EE00A7294D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAF70EFF24BA54EE00A7294D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -220,6 +224,7 @@
 				FA4DCDBD24F7D883007C2C05 /* GameController.swift */,
 				FA4DCDBF24F7D892007C2C05 /* GenreController.swift */,
 				FAD23F5824FBC732002D483A /* GameDelegate.swift */,
+				FAD23F5A24FBDB06002D483A /* FavoriteModel.xcdatamodeld */,
 			);
 			path = Tabbar;
 			sourceTree = "<group>";
@@ -230,6 +235,7 @@
 				FAF70F2F24BA9D3800A7294D /* DetailBerandaController.swift */,
 				FAF70F3124BA9D4B00A7294D /* DetailBerandaViewController.swift */,
 				FAF70F3B24BAAA6A00A7294D /* DetailBerandaAnotherController.swift */,
+				FA215026250CB48800A9A112 /* FavoriteGamesController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA215027250CB48800A9A112 /* FavoriteGamesController.swift in Sources */,
 				FAF70F1B24BA569700A7294D /* Utilities.swift in Sources */,
 				FA24825D24BAF263004A3BF3 /* GenreModels.swift in Sources */,
 				FAF70F3224BA9D4B00A7294D /* DetailBerandaViewController.swift in Sources */,
@@ -391,6 +398,7 @@
 				FAF70F0024BA54EE00A7294D /* SceneDelegate.swift in Sources */,
 				FAF70F2124BA582B00A7294D /* AboutController.swift in Sources */,
 				FA24826124BB2A62004A3BF3 /* Net.swift in Sources */,
+				FAD23F5C24FBDB06002D483A /* FavoriteModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,6 +598,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		FAD23F5A24FBDB06002D483A /* FavoriteModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FAD23F5B24FBDB06002D483A /* FavoriteModel.xcdatamodel */,
+			);
+			currentVersion = FAD23F5B24FBDB06002D483A /* FavoriteModel.xcdatamodel */;
+			name = FavoriteModel.xcdatamodeld;
+			path = ../../Model/FavoriteModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = FAF70EF224BA54EE00A7294D /* Project object */;
 }

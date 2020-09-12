@@ -9,10 +9,16 @@
 import UIKit
 
 protocol GameProtocol: class {
-    func favTapped()
+    func favTapped(id: Int, titleGames:String, releaseGames: String, ratingGames: Int, img: String)
 }
 
 class GameCell: UICollectionViewCell {
+    
+    var id = 0
+    var image = ""
+    var title = ""
+    var gamesRelease = ""
+    var rating = 0
     
     lazy var itemImage = UIImageView()
     let itemName = UILabel()
@@ -51,6 +57,11 @@ class GameCell: UICollectionViewCell {
         itemName.text = "Games: \(data.name ?? "")"
         itemDate.text = "Released: \(data.released ?? "")"
         itemRate.text = "Rating: \(data.rating ?? 0)/\(data.ratingsCount ?? 0)/\(data.ratingTop ?? 0)"
+        self.id = data.id ?? 0
+        self.title = data.name ?? ""
+        self.gamesRelease = data.released ?? ""
+        self.rating = data.ratingsCount ?? 0
+        self.image = data.backgroundImage ?? ""
     }
 
     private func cellShadow() {
@@ -77,7 +88,7 @@ class GameCell: UICollectionViewCell {
     }
     
     @objc private func move(){
-        delegate?.favTapped()
+        delegate?.favTapped(id: id, titleGames: title, releaseGames: gamesRelease, ratingGames: rating, img: image)
     }
     
     private func setLibrary() {
