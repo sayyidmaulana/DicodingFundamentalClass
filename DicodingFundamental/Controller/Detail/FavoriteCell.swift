@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteCell: UICollectionViewCell {
     
@@ -22,7 +23,7 @@ class FavoriteCell: UICollectionViewCell {
         button.layer.shadowRadius = 5.0
         button.layer.shadowColor = UIColor.black.cgColor
         button.setImage(#imageLiteral(resourceName: "favourite"), for: .normal)
-        button.tintColor = .white
+        button.tintColor = ColorTheme.redSweet
 
         return button
     }()
@@ -33,6 +34,7 @@ class FavoriteCell: UICollectionViewCell {
         cellShadow()
         setupView()
         setLibrary()
+        getData()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -64,6 +66,35 @@ class FavoriteCell: UICollectionViewCell {
     
     @objc private func move(){
 
+    }
+    
+    private func getData() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        let context = appDelegate.persistentContainer.viewContext
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteModel")
+        //request.predicate = NSPredicate(format: "age = %@", "12") //example
+        request.returnsObjectsAsFaults = false
+
+        do {
+            let result = try context.fetch(request)
+            for data in result as! [NSManagedObject] {
+                print(data.value(forKey: "id") as! Int)
+                print(data.value(forKey: "image") as! String)
+                print(data.value(forKey: "rating") as! Int)
+                print(data.value(forKey: "releasee") as! String)
+                print(data.value(forKey: "title") as! String)
+//                guard let thumb = data.value(forKey: "image") else { return }
+//                itemImage.loadImage(using: thumb as? String ?? "")
+//                itemName.text = data.value(forKey: "title") as? String
+//                itemDate.text = data.value(forKey: "releasee") as? String
+//                itemRate.text = "\(data.value(forKey: "rating") as? Int ?? 0)"
+            }
+            
+        } catch {
+            
+            print("Failed")
+        }
     }
     
     private func setLibrary() {
