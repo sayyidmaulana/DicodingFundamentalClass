@@ -34,7 +34,6 @@ class FavoriteCell: UICollectionViewCell {
         cellShadow()
         setupView()
         setLibrary()
-        getData()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -68,7 +67,7 @@ class FavoriteCell: UICollectionViewCell {
 
     }
     
-    private func getData() {
+    func getData() {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let context = appDelegate.persistentContainer.viewContext
@@ -80,15 +79,15 @@ class FavoriteCell: UICollectionViewCell {
             let result = try context.fetch(request)
             for data in result as! [NSManagedObject] {
                 print(data.value(forKey: "id") as! Int)
-                print(data.value(forKey: "image") as! String)
-                print(data.value(forKey: "rating") as! Int)
-                print(data.value(forKey: "releasee") as! String)
-                print(data.value(forKey: "title") as! String)
-//                guard let thumb = data.value(forKey: "image") else { return }
-//                itemImage.loadImage(using: thumb as? String ?? "")
-//                itemName.text = data.value(forKey: "title") as? String
-//                itemDate.text = data.value(forKey: "releasee") as? String
-//                itemRate.text = "\(data.value(forKey: "rating") as? Int ?? 0)"
+                print(data.value(forKey: "backgroundImage") as! String)
+                print(data.value(forKey: "ratingsCount") as! Int)
+                print(data.value(forKey: "released") as! String)
+                print(data.value(forKey: "name") as! String)
+                guard let thumb = data.value(forKey: "backgroundImage") else { return }
+                itemImage.loadImage(using: thumb as? String ?? "")
+                itemName.text = data.value(forKey: "name") as? String
+                itemDate.text = data.value(forKey: "released") as? String
+                itemRate.text = "\(data.value(forKey: "ratingsCount") as? Int ?? 0)"
             }
             
         } catch {

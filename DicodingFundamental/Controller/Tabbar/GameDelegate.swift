@@ -19,10 +19,10 @@ extension GameController: GameProtocol {
         let entity = NSEntityDescription.entity(forEntityName: "FavoriteModel", in: context)
         let newFav = NSManagedObject(entity: entity!, insertInto: context)
         newFav.setValue(id, forKey: "id")
-        newFav.setValue(titleGames, forKey: "title")
-        newFav.setValue(releaseGames, forKey: "releasee")
-        newFav.setValue(ratingGames, forKey: "rating")
-        newFav.setValue(img, forKey: "image")
+        newFav.setValue(titleGames, forKey: "name")
+        newFav.setValue(releaseGames, forKey: "released")
+        newFav.setValue(ratingGames, forKey: "ratingsCount")
+        newFav.setValue(img, forKey: "backgroundImage")
         
         do {
             try context.save()

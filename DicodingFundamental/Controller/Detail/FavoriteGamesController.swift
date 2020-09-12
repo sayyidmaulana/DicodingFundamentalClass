@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoriteGamesController: UIViewController {
+    
+    var itemArray = ["FavoriteModel"]
     
     let identifier = "cell"
     
@@ -69,11 +72,12 @@ class FavoriteGamesController: UIViewController {
 
 extension FavoriteGamesController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return itemArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionSubview.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FavoriteCell
+        cell.getData()
         return cell
     }
     
