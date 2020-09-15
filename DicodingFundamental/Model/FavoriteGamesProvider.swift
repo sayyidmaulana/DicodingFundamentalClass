@@ -71,39 +71,4 @@ class FavoriteGamesProvider {
         }
     }
     
-    func createData(_ id:Int, _ name:String, _ released:String, _ background_image:String, _ rating_top:Int, completion: @escaping() -> ()){
-        let taskContext = newTaskContext()
-        taskContext.performAndWait {
-            if let entity = NSEntityDescription.entity(forEntityName: "FavoriteModel", in: taskContext) {
-                let member = NSManagedObject(entity: entity, insertInto: taskContext)
-                member.setValue(id, forKeyPath: "id")
-                member.setValue(name, forKeyPath: "name")
-                member.setValue(released, forKeyPath: "released")
-                member.setValue(background_image, forKeyPath: "backgroundImage")
-                member.setValue(rating_top, forKeyPath: "ratingsCount")
-                do {
-                    try taskContext.save()
-                    completion()
-                } catch let error as NSError {
-                    print("Could not save. \(error), \(error.userInfo)")
-                }
-            }
-        }
-    }
-    
-    func deleteData(_ id: Int, completion: @escaping() -> ()){
-        let taskContext = newTaskContext()
-        taskContext.perform {
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteModel")
-            fetchRequest.fetchLimit = 1
-            fetchRequest.predicate = NSPredicate(format: "id == \(id)")
-            let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            batchDeleteRequest.resultType = .resultTypeCount
-            if let batchDeleteResult = try? taskContext.execute(batchDeleteRequest) as? NSBatchDeleteResult,
-                batchDeleteResult.result != nil {
-                completion()
-            }
-        }
-    }
-    
 }
