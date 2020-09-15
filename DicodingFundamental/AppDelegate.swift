@@ -63,6 +63,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        container.viewContext.automaticallyMergesChangesFromParent = false
+        container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        container.viewContext.shouldDeleteInaccessibleFaults = true
+        container.viewContext.undoManager = nil
+        
         return container
     }()
 

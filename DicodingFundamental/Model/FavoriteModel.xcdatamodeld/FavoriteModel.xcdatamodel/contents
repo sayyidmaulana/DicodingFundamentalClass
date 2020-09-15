@@ -4,10 +4,12 @@
         <attribute name="backgroundImage" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="rating" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="ratingsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="ratingTop" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="released" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="FavoriteModel" positionX="-63" positionY="-18" width="128" height="118"/>
+        <element name="FavoriteModel" positionX="-63" positionY="-18" width="128" height="148"/>
     </elements>
 </model>

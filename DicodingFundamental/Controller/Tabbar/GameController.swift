@@ -13,6 +13,8 @@ private let identifier = "Cell"
 class GameController: UIViewController {
     
     var games : [Result] = []
+    var dataGame: Result? = nil
+    lazy var gamesProvider: FavoriteGamesProvider = { return FavoriteGamesProvider() }()
     
     var spinner = UIActivityIndicatorView(style: .large)
     
@@ -125,7 +127,8 @@ class GameController: UIViewController {
     }
     
     @objc func dev() {
-        
+        let vc = BerandaController(collectionViewLayout: UICollectionViewFlowLayout())
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

@@ -11,7 +11,8 @@ import CoreData
 
 class FavoriteGamesController: UIViewController {
     
-    var itemArray = ["FavoriteModel"]
+    var itemArray = [Result]()
+    private lazy var gamesProvider: FavoriteGamesProvider = { return FavoriteGamesProvider() }()
     
     let identifier = "cell"
     
@@ -38,6 +39,7 @@ class FavoriteGamesController: UIViewController {
         super.viewDidLoad()
         setupView()
         cellShadow()
+        getFavorite()
     }
     
     fileprivate lazy var collectionSubview: UICollectionView = {
@@ -49,6 +51,15 @@ class FavoriteGamesController: UIViewController {
         
         return cv
     }()
+    
+    func getFavorite() {
+        gamesProvider.getAllData { (gameData) in
+            DispatchQueue.main.async {
+                self.collectionSubview.reloadData()
+                self.itemArray = gameData
+            }
+        }
+    }
     
     private func setupView() {
         navigationItem.titleView = titleStackView
@@ -76,8 +87,10 @@ extension FavoriteGamesController: UICollectionViewDataSource, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let data = self.itemArray[indexPath.row]
         let cell = collectionSubview.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FavoriteCell
-        cell.getData()
+        cell.setData(data: data)
+        cell.delegate = self
         return cell
     }
     
@@ -91,6 +104,32 @@ extension FavoriteGamesController: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
          return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    }
+    
+}
+
+extension FavoriteGamesController: FavoriteProtocol {
+
+    func favoriteTapped(id: Int, titleGames: String, releaseGames: String, ratingGames: Int, img: String) {
+        
+         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                
+        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "FavoriteModel")
+        
+        do {
+            let dataToDelete = try context.fetch(fetchRequest)[0] as! NSManagedObject
+            context.delete(dataToDelete)
+            
+            try context.save()
+            Utilities.showAlert(controller: self, message: "Your games removed !", seconds: 1)
+            DispatchQueue.main.async {
+                self.collectionSubview.reloadData()
+            }
+        } catch {
+            Utilities.showAlert(controller: self, message: "Fail to remove your game !", seconds: 1)
+        }
+
     }
     
 }

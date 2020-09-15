@@ -25,13 +25,13 @@ class BerandaController: UICollectionViewController, UICollectionViewDelegateFlo
     lazy var titleStackView: UIStackView = {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
-        titleLabel.text = "Catalouge"
+        titleLabel.text = "View yang lama"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
         titleLabel.tag = 0
         $0.addArrangedSubview(titleLabel)
         let subtitleLabel = UILabel()
         subtitleLabel.textAlignment = .center
-        subtitleLabel.text = "List of the Game"
+        subtitleLabel.text = "Ini adalah halaman yang lama"
         subtitleLabel.font = UIFont.italicSystemFont(ofSize: 10)
         subtitleLabel.tintColor = ColorTheme.darkGray
         subtitleLabel.tag = 1
