@@ -106,6 +106,12 @@ extension FavoriteGamesController: UICollectionViewDataSource, UICollectionViewD
          return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = DetailBerandaViewController()
+        vc.gamesId = "\(itemArray[indexPath.row].id ?? 0)"
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension FavoriteGamesController: FavoriteProtocol {

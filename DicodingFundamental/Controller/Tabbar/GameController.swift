@@ -123,11 +123,13 @@ class GameController: UIViewController {
     
     @objc func fav() {
         let vc = FavoriteGamesController()
+        self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func dev() {
         let vc = BerandaController(collectionViewLayout: UICollectionViewFlowLayout())
+        self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
