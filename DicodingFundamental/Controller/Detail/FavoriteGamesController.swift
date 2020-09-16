@@ -16,6 +16,9 @@ class FavoriteGamesController: UIViewController {
     
     let identifier = "cell"
     
+    var spinner = UIActivityIndicatorView(style: .large)
+    var there = false
+    
     lazy var titleStackView: UIStackView = {
         let titleLabel = UILabel()
         titleLabel.textAlignment = .center
@@ -40,6 +43,7 @@ class FavoriteGamesController: UIViewController {
         setupView()
         cellShadow()
         getFavorite()
+        collectionSubview.reloadData()
     }
     
     fileprivate lazy var collectionSubview: UICollectionView = {
@@ -53,8 +57,10 @@ class FavoriteGamesController: UIViewController {
     }()
     
     func getFavorite() {
+        self.spinner.isHidden = false
         gamesProvider.getAllData { (gameData) in
             DispatchQueue.main.async {
+                self.spinner.isHidden = true
                 self.collectionSubview.reloadData()
                 self.itemArray = gameData
             }
@@ -118,7 +124,8 @@ extension FavoriteGamesController: FavoriteProtocol {
 
     func favoriteTapped(id: Int, titleGames: String, releaseGames: String, ratingGames: Int, img: String) {
         
-         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.spinner.isHidden = false
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
                 
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "FavoriteModel")
@@ -130,8 +137,11 @@ extension FavoriteGamesController: FavoriteProtocol {
             try context.save()
             Utilities.showAlert(controller: self, message: "Your games removed !", seconds: 1)
             DispatchQueue.main.async {
+                self.spinner.isHidden = true
                 self.collectionSubview.reloadData()
+                self.there = false
             }
+            
         } catch {
             Utilities.showAlert(controller: self, message: "Fail to remove your game !", seconds: 1)
         }

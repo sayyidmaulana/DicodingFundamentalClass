@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GameProtocol: class {
-    func favTapped(id: Int, titleGames:String, releaseGames: String, ratingGames: Int, img: String)
+    func favTapped(id: Int, titleGames:String, releaseGames: String, ratingGames: Int, img: String, isThere: Bool)
 }
 
 class GameCell: UICollectionViewCell {
@@ -19,6 +19,11 @@ class GameCell: UICollectionViewCell {
     var title = ""
     var gamesRelease = ""
     var rating = 0
+    
+    var gameData: Result? = nil
+    var dataGame = [Result]()
+    lazy var gamesProvider: FavoriteGamesProvider = { return FavoriteGamesProvider() }()
+    var there = false
     
     lazy var itemImage = UIImageView()
     let itemName = UILabel()
@@ -45,10 +50,30 @@ class GameCell: UICollectionViewCell {
         cellShadow()
         setupView()
         setLibrary()
+        database()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func database() {
+        gamesProvider.getAllData { (dataGame) in
+            for x in 0 ..< dataGame.count {
+                if self.id == dataGame[x].id {
+                    self.there = true
+                }
+            }
+            
+            DispatchQueue.main.async {
+                if self.there {
+                    self.loveButton.tintColor = ColorTheme.redSweet
+                } else {
+                    self.loveButton.tintColor = .black
+                }
+            }
+            
+        }
     }
     
     func setData(data: Result) {
@@ -88,7 +113,7 @@ class GameCell: UICollectionViewCell {
     }
     
     @objc private func move(){
-        delegate?.favTapped(id: id, titleGames: title, releaseGames: gamesRelease, ratingGames: rating, img: image)
+        delegate?.favTapped(id: id, titleGames: title, releaseGames: gamesRelease, ratingGames: rating, img: image, isThere: there)
     }
     
     private func setLibrary() {

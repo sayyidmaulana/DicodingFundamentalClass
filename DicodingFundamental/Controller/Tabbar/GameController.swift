@@ -15,6 +15,8 @@ class GameController: UIViewController {
     var games : [Result] = []
     var dataGame: Result? = nil
     lazy var gamesProvider: FavoriteGamesProvider = { return FavoriteGamesProvider() }()
+    var id = 0
+    var there = false
     
     var spinner = UIActivityIndicatorView(style: .large)
     
@@ -52,7 +54,7 @@ class GameController: UIViewController {
         checkGenre()
     }
     
-    fileprivate lazy var collectionSubview: UICollectionView = {
+    lazy var collectionSubview: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -109,9 +111,9 @@ class GameController: UIViewController {
                 self.games = JSONData.results ?? []
                 
                 DispatchQueue.main.async {
+                    self.spinner.isHidden = true
                     self.collectionSubview.reloadData()
                     
-                    self.spinner.isHidden = true
                 }
                 
             } catch let jsonError {
@@ -123,13 +125,11 @@ class GameController: UIViewController {
     
     @objc func fav() {
         let vc = FavoriteGamesController()
-        self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc func dev() {
         let vc = BerandaController(collectionViewLayout: UICollectionViewFlowLayout())
-        self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -157,6 +157,7 @@ extension GameController: UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.delegate = self
         let game = games[indexPath.item]
         cell.setData(data: game)
+        
         return cell
     }
     
