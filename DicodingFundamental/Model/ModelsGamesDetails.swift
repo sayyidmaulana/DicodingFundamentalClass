@@ -10,6 +10,9 @@ import Foundation
 
 struct DetailsGamesView: Codable {
     let id : Int?
+    let name: String?
     let description: String?
     let background_image: String?
+    let released: String?
+    let ratings_count: Int?
 }

@@ -30,17 +30,6 @@ class GameCell: UICollectionViewCell {
     let itemDate = UILabel()
     let itemRate = UILabel()
     
-     lazy var loveButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        button.layer.shadowRadius = 5.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.setImage(#imageLiteral(resourceName: "favourite"), for: .normal)
-        button.tintColor = .white
-        button.addTarget(self, action: #selector(move), for: .touchUpInside)
-        return button
-    }()
     
     weak var delegate: GameProtocol?
     
@@ -50,31 +39,12 @@ class GameCell: UICollectionViewCell {
         cellShadow()
         setupView()
         setLibrary()
-        database()
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func database() {
-        gamesProvider.getAllData { (dataGame) in
-            for x in 0 ..< dataGame.count {
-                if self.id == dataGame[x].id {
-                    self.there = true
-                }
-            }
-            
-            DispatchQueue.main.async {
-                if self.there {
-                    self.loveButton.tintColor = ColorTheme.redSweet
-                } else {
-                    self.loveButton.tintColor = .black
-                }
-            }
-            
-        }
-    }
     
     func setData(data: Result) {
         guard let thumb = data.backgroundImage else { return }
@@ -107,13 +77,7 @@ class GameCell: UICollectionViewCell {
         itemName.setAnchor(top: topAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 15, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
         itemDate.setAnchor(top: itemName.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
         itemRate.setAnchor(top: itemDate.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
-        addSubview(loveButton)
-        loveButton.setAnchor(top: topAnchor, left: leadingAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 7, paddingBottom: 0, paddingRight: 0, width: 30, height: 30)
         
-    }
-    
-    @objc private func move(){
-        delegate?.favTapped(id: id, titleGames: title, releaseGames: gamesRelease, ratingGames: rating, img: image, isThere: there)
     }
     
     private func setLibrary() {

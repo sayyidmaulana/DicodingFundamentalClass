@@ -28,18 +28,6 @@ class FavoriteCell: UICollectionViewCell {
     let itemDate = UILabel()
     let itemRate = UILabel()
     
-     lazy var loveButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.layer.shadowOpacity = 0.5
-        button.layer.shadowOffset = CGSize(width: 2, height: 2)
-        button.layer.shadowRadius = 5.0
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.setImage(#imageLiteral(resourceName: "favourite"), for: .normal)
-        button.tintColor = ColorTheme.redSweet
-        button.addTarget(self, action: #selector(self.move), for: .touchUpInside)
-
-        return button
-    }()
     
     weak var delegate: FavoriteProtocol?
     
@@ -74,13 +62,7 @@ class FavoriteCell: UICollectionViewCell {
         itemName.setAnchor(top: topAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 15, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
         itemDate.setAnchor(top: itemName.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
         itemRate.setAnchor(top: itemDate.bottomAnchor, left: itemImage.trailingAnchor, bottom: nil, right: trailingAnchor, paddingTop: 10, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0)
-        addSubview(loveButton)
-        loveButton.setAnchor(top: topAnchor, left: leadingAnchor, bottom: nil, right: nil, paddingTop: 8, paddingLeft: 7, paddingBottom: 0, paddingRight: 0, width: 30, height: 30)
         
-    }
-    
-    @objc private func move(){
-        delegate?.favoriteTapped(id: id, titleGames: title, releaseGames: gamesRelease, ratingGames: rating, img: image)
     }
     
     func setData(data: Result) {
