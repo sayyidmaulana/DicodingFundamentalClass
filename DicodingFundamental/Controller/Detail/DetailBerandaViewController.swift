@@ -135,6 +135,8 @@ class DetailBerandaViewController: UIViewController, WKUIDelegate, WKNavigationD
     private func setData() {
 
         self.spinner.isHidden = false
+        self.love.isHidden = true
+        self.loveButton.isHidden = true
         let myUrl = URL(string: filterGames(games_id: gamesId))
         var request = URLRequest(url: myUrl!)
         
@@ -166,7 +168,9 @@ class DetailBerandaViewController: UIViewController, WKUIDelegate, WKNavigationD
                     self.webView.allowsBackForwardNavigationGestures = true
                     self.webView.configuration.preferences.javaScriptEnabled = true
                     self.webView.navigationDelegate = self
-                      self.spinner.isHidden = true
+                    self.spinner.isHidden = true
+                    self.love.isHidden = false
+                    self.loveButton.isHidden = false
                 }
                 
             } catch let jsonError {
@@ -182,30 +186,24 @@ class DetailBerandaViewController: UIViewController, WKUIDelegate, WKNavigationD
             gamesProvider.createData(gamesDetails?.id ?? 0, gamesDetails?.name ?? "", gamesDetails?.released ?? "", gamesDetails?.background_image ?? "", gamesDetails?.ratings_count ?? 0) {
                 DispatchQueue.main.async {
                     Utilities.showAlert(controller: self, message: "Data berhasil disimpan !", seconds: 1)
+                    self.view.addSubview(self.love)
+                    self.love.setAnchor(top: self.imgMenu.topAnchor, left: nil, bottom: nil, right: self.imgMenu.trailingAnchor, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 28, width: 40, height: 40)
                     self.there = true
                 }
             }
 
         } else {
             
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                    
-            let context = appDelegate.persistentContainer.viewContext
-            let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "FavoriteModel")
-            
-            do {
-                let dataToDelete = try context.fetch(fetchRequest)[0] as! NSManagedObject
-                context.delete(dataToDelete)
+            gamesProvider.deleteData(gamesDetails?.id ?? 0) {
                 
-                try context.save()
-                Utilities.showAlert(controller: self, message: "Your games removed !", seconds: 1)
-                DispatchQueue.main.async {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    Utilities.showAlert(controller: self, message: "Data berhasil dihapus !", seconds: 1)
+                    self.view.addSubview(self.loveButton)
+                    self.loveButton.setAnchor(top: self.imgMenu.topAnchor, left: nil, bottom: nil, right: self.imgMenu.trailingAnchor, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 28, width: 40, height: 40)
                     self.there = false
                 }
-                
-            } catch {
-                Utilities.showAlert(controller: self, message: "Fail to remove your game !", seconds: 1)
             }
+
         }
     }
     

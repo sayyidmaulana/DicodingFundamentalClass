@@ -37,13 +37,34 @@ class FavoriteGamesController: UIViewController {
         stackView.axis = .vertical
         return stackView
     }(UIStackView())
+    
+    fileprivate lazy var imgMenu: UIImageView = {
+        let imgViewMenu = UIImageView()
+        imgViewMenu.contentMode = .scaleAspectFit
+        imgViewMenu.image = #imageLiteral(resourceName: "dicoding")
+        return imgViewMenu
+    }()
+    let textMenu: UILabel = {
+        let textViewMenu = UILabel()
+        textViewMenu.textAlignment = .center
+        textViewMenu.font = UIFont.systemFont(ofSize: 12)
+        textViewMenu.text = "Tidak ada data !"
+        textViewMenu.numberOfLines = 50
+        return textViewMenu
+    }()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         cellShadow()
+        view.backgroundColor = .white
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.collectionSubview.reloadData()
         getFavorite()
-        collectionSubview.reloadData()
     }
     
     fileprivate lazy var collectionSubview: UICollectionView = {
@@ -57,13 +78,26 @@ class FavoriteGamesController: UIViewController {
     }()
     
     func getFavorite() {
+        self.spinner.startAnimating()
         self.spinner.isHidden = false
         gamesProvider.getAllData { (gameData) in
-            DispatchQueue.main.async {
                 self.spinner.isHidden = true
-                self.collectionSubview.reloadData()
-                self.itemArray = gameData
-            }
+                if gameData.isEmpty {
+                    DispatchQueue.main.async {
+                        self.imgMenu.isHidden = false
+                        self.textMenu.isHidden = false
+                        self.collectionSubview.isHidden = true
+                        self.collectionSubview.reloadData()
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.imgMenu.isHidden = true
+                        self.textMenu.isHidden = true
+                        self.collectionSubview.isHidden = false
+                        self.itemArray = gameData
+                        self.collectionSubview.reloadData()
+                    }
+                }
         }
     }
     
@@ -74,6 +108,10 @@ class FavoriteGamesController: UIViewController {
         collectionSubview.register(FavoriteCell.self, forCellWithReuseIdentifier: identifier)
         view.addSubview(collectionSubview)
         collectionSubview.setAnchor(top: view.topAnchor, left: view.leadingAnchor, bottom: view.bottomAnchor, right: view.trailingAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
+        view.addSubview(imgMenu)
+        view.addSubview(textMenu)
+        imgMenu.setAnchor(top: view.topAnchor, left: view.leadingAnchor, bottom: nil, right: nil, paddingTop: 150, paddingLeft: 120, paddingBottom: 0, paddingRight: 0, width: 100, height: 100)
+        textMenu.setAnchor(top: imgMenu.bottomAnchor, left: view.leadingAnchor, bottom: nil, right: nil, paddingTop: 30, paddingLeft: 120, paddingBottom: 0, paddingRight: 0, width: 0, height: 0)
     }
     
     private func cellShadow() {
@@ -96,7 +134,6 @@ extension FavoriteGamesController: UICollectionViewDataSource, UICollectionViewD
         let data = self.itemArray[indexPath.row]
         let cell = collectionSubview.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! FavoriteCell
         cell.setData(data: data)
-        cell.delegate = self
         return cell
     }
     
@@ -116,36 +153,6 @@ extension FavoriteGamesController: UICollectionViewDataSource, UICollectionViewD
         let vc = DetailBerandaViewController()
         vc.gamesId = "\(itemArray[indexPath.row].id ?? 0)"
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-}
-
-extension FavoriteGamesController: FavoriteProtocol {
-
-    func favoriteTapped(id: Int, titleGames: String, releaseGames: String, ratingGames: Int, img: String) {
-        
-        self.spinner.isHidden = false
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest:NSFetchRequest<NSFetchRequestResult> = NSFetchRequest.init(entityName: "FavoriteModel")
-        
-        do {
-            let dataToDelete = try context.fetch(fetchRequest)[0] as! NSManagedObject
-            context.delete(dataToDelete)
-            
-            try context.save()
-            Utilities.showAlert(controller: self, message: "Your games removed !", seconds: 1)
-            DispatchQueue.main.async {
-                self.spinner.isHidden = true
-                self.collectionSubview.reloadData()
-                self.there = false
-            }
-            
-        } catch {
-            Utilities.showAlert(controller: self, message: "Fail to remove your game !", seconds: 1)
-        }
-
     }
     
 }
