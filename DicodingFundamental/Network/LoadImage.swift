@@ -17,9 +17,9 @@ public extension UIImageView {
         if let img = cache.object(forKey: urlString as NSString) {
             image = img
         } else {
-            guard let `url` = url else { return }
+            guard let imageUrl = url else { return }
             DispatchQueue.global().async {
-                URLSession.shared.dataTask(with: url, completionHandler: { (d, _, e) in
+                URLSession.shared.dataTask(with: imageUrl, completionHandler: { (d, _, e) in
                     if e == nil {
                         DispatchQueue.main.async(execute: {
                             if let `data` = d, let img = UIImage(data: data) {

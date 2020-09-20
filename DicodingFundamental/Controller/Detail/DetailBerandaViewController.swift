@@ -196,11 +196,14 @@ class DetailBerandaViewController: UIViewController, WKUIDelegate, WKNavigationD
             
             gamesProvider.deleteData(gamesDetails?.id ?? 0) {
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     Utilities.showAlert(controller: self, message: "Data berhasil dihapus !", seconds: 1)
                     self.view.addSubview(self.loveButton)
                     self.loveButton.setAnchor(top: self.imgMenu.topAnchor, left: nil, bottom: nil, right: self.imgMenu.trailingAnchor, paddingTop: 100, paddingLeft: 0, paddingBottom: 0, paddingRight: 28, width: 40, height: 40)
                     self.there = false
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
 

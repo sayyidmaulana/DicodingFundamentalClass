@@ -9,17 +9,7 @@
 import UIKit
 import CoreData
 
-protocol FavoriteProtocol: AnyObject {
-    func favoriteTapped(id: Int, titleGames:String, releaseGames: String, ratingGames: Int, img: String)
-}
-
 class FavoriteCell: UICollectionViewCell {
-    
-    var id = 0
-    var image = ""
-    var title = ""
-    var gamesRelease = ""
-    var rating = 0
     
     var data: Result? = nil
     
@@ -28,16 +18,12 @@ class FavoriteCell: UICollectionViewCell {
     let itemDate = UILabel()
     let itemRate = UILabel()
     
-    
-    weak var delegate: FavoriteProtocol?
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
         cellShadow()
         setupView()
         setLibrary()
-//        getData()
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -70,8 +56,6 @@ class FavoriteCell: UICollectionViewCell {
         let rating = data.ratingsCount ?? 0
         let release = data.released ?? ""
         
-        self.data = data
-        self.id = data.id ?? 0
         itemImage.loadImage(using: thumb)
         itemName.text = data.name
         itemDate.text = release
@@ -79,40 +63,6 @@ class FavoriteCell: UICollectionViewCell {
         print(data.backgroundImage ?? "")
         print(data.name ?? "")
         print(data.released ?? "")
-    }
-    
-    func getData() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
-        let context = appDelegate.persistentContainer.viewContext
-        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteModel")
-        //request.predicate = NSPredicate(format: "age = %@", "12") //example
-        request.returnsObjectsAsFaults = false
-
-        do {
-            let result = try context.fetch(request)
-            for data in result as! [NSManagedObject] {
-                print(data.value(forKey: "id") as! Int)
-                print(data.value(forKey: "backgroundImage") as! String)
-                print(data.value(forKey: "ratingsCount") as! Int)
-                print(data.value(forKey: "released") as! String)
-                print(data.value(forKey: "name") as! String)
-                guard let thumb = data.value(forKey: "backgroundImage") else { return }
-                itemImage.loadImage(using: thumb as? String ?? "")
-                itemName.text = data.value(forKey: "name") as? String
-                itemDate.text = data.value(forKey: "released") as? String
-                itemRate.text = "\(data.value(forKey: "ratingsCount") as? Int ?? 0)"
-                self.id = data.value(forKey: "id") as? Int ?? 0
-                self.title = data.value(forKey: "name") as? String ?? ""
-                self.gamesRelease = data.value(forKey: "released") as? String ?? ""
-                self.rating = data.value(forKey: "ratingsCount") as? Int ?? 0
-                self.image = data.value(forKey: "backgroundImage") as? String ?? ""
-            }
-            
-        } catch {
-            
-            print("Failed")
-        }
     }
     
     private func setLibrary() {
